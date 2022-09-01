@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router"
+import { defineAsyncComponent } from "vue"
 const Layout = () => import("@/layout/index.vue")
 
 /** 常驻路由 */
@@ -35,102 +36,158 @@ export const constantRoutes: Array<RouteRecordRaw> = [
         meta: {
           title: "首页",
           icon: "dashboard",
-          affix: true
+          affix: true,
+          keepAlive: false
         }
       }
     ]
   },
   {
-    path: "/unocss",
+    path: "/network",
     component: Layout,
-    redirect: "/unocss/index",
-    children: [
-      {
-        path: "index",
-        component: () => import("@/views/unocss/index.vue"),
-        name: "Unocss",
-        meta: {
-          title: "unocss",
-          icon: "unocss"
-        }
-      }
-    ]
-  },
-  {
-    path: "/link",
-    component: Layout,
-    children: [
-      {
-        path: "https://juejin.cn/post/7089377403717287972",
-        component: () => {},
-        name: "Link",
-        meta: {
-          title: "外链",
-          icon: "link"
-        }
-      }
-    ]
-  },
-  {
-    path: "/menu",
-    component: Layout,
-    redirect: "/menu/menu1",
-    name: "Menu",
+    redirect: "/network/index",
     meta: {
-      title: "多级菜单",
+      title: "网关",
       icon: "menu"
     },
     children: [
       {
-        path: "menu1",
-        component: () => import("@/views/menu/menu1/index.vue"),
-        redirect: "/menu/menu1/menu1-1",
-        name: "Menu1",
-        meta: { title: "menu1" },
-        children: [
-          {
-            path: "menu1-1",
-            component: () => import("@/views/menu/menu1/menu1-1/index.vue"),
-            name: "Menu1-1",
-            meta: { title: "menu1-1" }
-          },
-          {
-            path: "menu1-2",
-            component: () => import("@/views/menu/menu1/menu1-2/index.vue"),
-            redirect: "/menu/menu1/menu1-2/menu1-2-1",
-            name: "Menu1-2",
-            meta: { title: "menu1-2" },
-            children: [
-              {
-                path: "menu1-2-1",
-                component: () => import("@/views/menu/menu1/menu1-2/menu1-2-1/index.vue"),
-                name: "Menu1-2-1",
-                meta: { title: "menu1-2-1" }
-              },
-              {
-                path: "menu1-2-2",
-                component: () => import("@/views/menu/menu1/menu1-2/menu1-2-2/index.vue"),
-                name: "Menu1-2-2",
-                meta: { title: "menu1-2-2" }
-              }
-            ]
-          },
-          {
-            path: "menu1-3",
-            component: () => import("@/views/menu/menu1/menu1-3/index.vue"),
-            name: "Menu1-3",
-            meta: { title: "menu1-3" }
-          }
-        ]
+        path: "index",
+        component: defineAsyncComponent(() => import("@/views/network/index.vue")),
+        name: "Network",
+        meta: {
+          title: "网关请求",
+          icon: "menu",
+          affix: false,
+          keepAlive: true
+        }
       },
       {
-        path: "menu2",
-        component: () => import("@/views/menu/menu2/index.vue"),
-        name: "Menu2",
-        meta: { title: "menu2" }
+        path: "list",
+        component: defineAsyncComponent(() => import("@/views/network/list.vue")),
+        name: "NetworkList",
+        meta: {
+          title: "请求列表",
+          icon: "menu",
+          affix: false,
+          keepAlive: true
+        }
+      }
+    ]
+  },
+  {
+    path: "/Json",
+    component: Layout,
+    redirect: "/Json/index",
+    meta: {
+      title: "JSON",
+      icon: "menu"
+    },
+    children: [
+      {
+        path: "index",
+        component: defineAsyncComponent(() => import("@/views/Json/index.vue")),
+        name: "Json",
+        meta: {
+          title: "格式化",
+          icon: "menu",
+          affix: false,
+          keepAlive: true
+        }
       }
     ]
   }
+  // {
+  //   path: "/unocss",
+  //   component: Layout,
+  //   redirect: "/unocss/index",
+  //   children: [
+  //     {
+  //       path: "index",
+  //       component: () => import("@/views/unocss/index.vue"),
+  //       name: "Unocss",
+  //       meta: {
+  //         title: "unocss",
+  //         icon: "unocss"
+  //       }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: "/link",
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: "https://juejin.cn/post/7089377403717287972",
+  //       component: () => {},
+  //       name: "Link",
+  //       meta: {
+  //         title: "外链",
+  //         icon: "link"
+  //       }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: "/menu",
+  //   component: Layout,
+  //   redirect: "/menu/menu1",
+  //   name: "Menu",
+  //   meta: {
+  //     title: "多级菜单",
+  //     icon: "menu"
+  //   },
+  //   children: [
+  //     {
+  //       path: "menu1",
+  //       component: () => import("@/views/menu/menu1/index.vue"),
+  //       redirect: "/menu/menu1/menu1-1",
+  //       name: "Menu1",
+  //       meta: { title: "menu1" },
+  //       children: [
+  //         {
+  //           path: "menu1-1",
+  //           component: () => import("@/views/menu/menu1/menu1-1/index.vue"),
+  //           name: "Menu1-1",
+  //           meta: { title: "menu1-1" }
+  //         },
+  //         {
+  //           path: "menu1-2",
+  //           component: () => import("@/views/menu/menu1/menu1-2/index.vue"),
+  //           redirect: "/menu/menu1/menu1-2/menu1-2-1",
+  //           name: "Menu1-2",
+  //           meta: { title: "menu1-2" },
+  //           children: [
+  //             {
+  //               path: "menu1-2-1",
+  //               component: () => import("@/views/menu/menu1/menu1-2/menu1-2-1/index.vue"),
+  //               name: "Menu1-2-1",
+  //               meta: { title: "menu1-2-1" }
+  //             },
+  //             {
+  //               path: "menu1-2-2",
+  //               component: () => import("@/views/menu/menu1/menu1-2/menu1-2-2/index.vue"),
+  //               name: "Menu1-2-2",
+  //               meta: { title: "menu1-2-2" }
+  //             }
+  //           ]
+  //         },
+  //         {
+  //           path: "menu1-3",
+  //           component: () => import("@/views/menu/menu1/menu1-3/index.vue"),
+  //           name: "Menu1-3",
+  //           meta: { title: "menu1-3" }
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       path: "menu2",
+  //       component: () => import("@/views/menu/menu2/index.vue"),
+  //       name: "Menu2",
+  //       meta: { title: "menu2" }
+  //     }
+  //   ]
+  // }
 ]
 
 /**
@@ -139,37 +196,37 @@ export const constantRoutes: Array<RouteRecordRaw> = [
  * 必须带有 Name 属性
  */
 export const asyncRoutes: Array<RouteRecordRaw> = [
-  {
-    path: "/permission",
-    component: Layout,
-    redirect: "/permission/page",
-    name: "Permission",
-    meta: {
-      title: "权限管理",
-      icon: "lock",
-      roles: ["admin", "editor"], // 可以在根路由中设置角色
-      alwaysShow: true // 将始终显示根菜单
-    },
-    children: [
-      {
-        path: "page",
-        component: () => import("@/views/permission/page.vue"),
-        name: "PagePermission",
-        meta: {
-          title: "页面权限",
-          roles: ["admin"] // 或者在子导航中设置角色
-        }
-      },
-      {
-        path: "directive",
-        component: () => import("@/views/permission/directive.vue"),
-        name: "DirectivePermission",
-        meta: {
-          title: "指令权限" // 如果未设置角色，则表示：该页面不需要权限，但会继承根路由的角色
-        }
-      }
-    ]
-  },
+  // {
+  //   path: "/permission",
+  //   component: Layout,
+  //   redirect: "/permission/page",
+  //   name: "Permission",
+  //   meta: {
+  //     title: "权限管理",
+  //     icon: "lock",
+  //     roles: ["admin", "editor"], // 可以在根路由中设置角色
+  //     alwaysShow: true // 将始终显示根菜单
+  //   },
+  //   children: [
+  //     {
+  //       path: "page",
+  //       component: () => import("@/views/permission/page.vue"),
+  //       name: "PagePermission",
+  //       meta: {
+  //         title: "页面权限",
+  //         roles: ["admin"] // 或者在子导航中设置角色
+  //       }
+  //     },
+  //     {
+  //       path: "directive",
+  //       component: () => import("@/views/permission/directive.vue"),
+  //       name: "DirectivePermission",
+  //       meta: {
+  //         title: "指令权限" // 如果未设置角色，则表示：该页面不需要权限，但会继承根路由的角色
+  //       }
+  //     }
+  //   ]
+  // },
   {
     path: "/:pathMatch(.*)*", // 必须将 'ErrorPage' 路由放在最后, Must put the 'ErrorPage' route at the end
     component: Layout,

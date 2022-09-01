@@ -4,6 +4,7 @@ import { useRouter } from "vue-router"
 import { useUserStore } from "@/store/modules/user"
 import { User, Lock, Key } from "@element-plus/icons-vue"
 import ThemeSwitch from "@/components/ThemeSwitch/index.vue"
+import { ElMessage } from "element-plus"
 
 interface ILoginForm {
   /** admin 或 editor */
@@ -25,7 +26,7 @@ const state = reactive({
   /** 登录表单 */
   loginForm: {
     username: "admin",
-    password: "12345678",
+    password: "gome2022c3",
     code: "abcd"
   } as ILoginForm,
   /** 登录表单校验规则 */
@@ -33,7 +34,7 @@ const state = reactive({
     username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
     password: [
       { required: true, message: "请输入密码", trigger: "blur" },
-      { min: 8, max: 16, message: "长度在 8 到 16 个字符", trigger: "blur" }
+      { min: 6, max: 16, message: "长度在 6 到 16 个字符", trigger: "blur" }
     ],
     code: [{ required: true, message: "请输入验证码", trigger: "blur" }]
   },
@@ -54,6 +55,7 @@ const state = reactive({
             })
           })
           .catch(() => {
+            ElMessage.error("用户名或密码错误！")
             state.loading = false
             state.createCode()
             state.loginForm.password = ""

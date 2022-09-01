@@ -3,7 +3,7 @@ import { useUserStoreHook } from "@/store/modules/user"
 import { ElMessage } from "element-plus"
 import { get } from "lodash-es"
 
-import { getNowFormatDate, sign } from "./sign2"
+import { getNowFormatDate, sign } from "./sign"
 
 /** 创建请求实例 */
 function createService() {
@@ -93,33 +93,39 @@ function createService() {
 /** 创建请求方法 */
 function createRequestFunction(service: AxiosInstance) {
   return function (config: AxiosRequestConfig) {
-    const query = Object.assign(
-      {
-        appid: "",
-        method: "",
-        format: "JSON",
-        charset: "UTF-8",
-        sign_type: "MD5",
-        sign: "",
-        timestamp: getNowFormatDate(),
-        version: "1.0",
-        client_ip: "",
-        pos: "",
-        notify_url: "",
-        req_no: new Date().getTime(),
-        platform: "",
-        login_token: "",
-        biz_params: ""
-      },
-      config.data
-    )
+    const query = {
+      appid: "",
+      charset: "UTF-8",
+      data: config.data.data,
+      format: "JSON",
+      req_no: new Date().getTime(),
+      sign_type: "MD5",
+      timestamp: getNowFormatDate(),
+      version: "1.0",
+      sign: ""
+    }
     const apiUrl = config.baseURL
     query.sign = sign(query, query.sign_type)
     const configDefault = {
       headers: {
         // 携带 Token
         // "X-Access-Token": getToken(),
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        brand: "",
+        model: "",
+        system: "",
+        platform: "",
+        native_version: "",
+        device_id: "",
+        app_code: "",
+        app_version: "",
+        net_type: "",
+        net_id: "",
+        net_ip: "",
+        location: "",
+        loc_code: "",
+        method: config.data.method,
+        token: ""
       },
       timeout: 5000,
       baseURL: apiUrl,

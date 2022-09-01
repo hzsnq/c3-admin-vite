@@ -2,20 +2,26 @@
 import { computed } from "vue"
 import { useRoute } from "vue-router"
 
-const route = useRoute()
+const routes = useRoute()
 const key = computed(() => {
-  return route.path
+  console.log(routes.name)
+  return routes.path
 })
+
+//v-slot="{ Component, route }"
 </script>
 
 <template>
   <section class="app-main">
-    <router-view v-slot="{ Component }">
-      <transition name="fade-transform" mode="out-in">
-        <!-- <keep-alive> -->
-        <component :is="Component" :key="key" />
-        <!-- </keep-alive> -->
-      </transition>
+    <router-view>
+      <template #default="{ Component, route }">
+        <transition name="fade-transform" mode="out-in" appear>
+          <keep-alive>
+            <component :is="Component" :key="key" v-if="route.meta.keepAlive" />
+          </keep-alive>
+        </transition>
+        <component :is="Component" :key="route.fullPath" v-if="!route.meta.keepAlive" />
+      </template>
     </router-view>
   </section>
 </template>

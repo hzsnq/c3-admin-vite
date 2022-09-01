@@ -27,31 +27,57 @@ export const useUserStore = defineStore({
     /** 登录 */
     login(userInfo: { username: string; password: string }) {
       return new Promise((resolve, reject) => {
-        login({
-          username: userInfo.username.trim(),
-          password: userInfo.password
-        })
-          .then((res: any) => {
-            setToken(res.data.accessToken)
-            this.token = res.data.accessToken
+        if (userInfo.username === "admin" && userInfo.password === "gome2022c3") {
+          const tokenData = "admin-token"
+          setTimeout(() => {
+            setToken(tokenData)
+            this.token = tokenData
             resolve(true)
-          })
-          .catch((error) => {
-            reject(error)
-          })
+          }, 1000)
+        } else {
+          reject("账号密码错误")
+        }
+
+        // login({
+        //   username: userInfo.username.trim(),
+        //   password: userInfo.password
+        // })
+        //   .then((res: any) => {
+        //     setToken(res.data.accessToken)
+        //     this.token = res.data.accessToken
+        //     resolve(true)
+        //   })
+        //   .catch((error) => {
+        //     reject(error)
+        //   })
       })
     },
     /** 获取用户详情 */
     getInfo() {
-      return new Promise((resolve, reject) => {
-        getUserInfo()
-          .then((res: any) => {
-            this.roles = res.data.user.roles
-            resolve(res)
-          })
-          .catch((error) => {
-            reject(error)
-          })
+      return new Promise((resolve) => {
+        const data = {
+          user: {
+            id: 0,
+            username: "admin",
+            password: "any",
+            name: "Super Admin",
+            avatar: "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",
+            introduction: "I am a super administrator",
+            email: "admin@test.com",
+            phone: "1234567890",
+            roles: ["admin"]
+          }
+        }
+        this.roles = data.user.roles
+        resolve(data)
+        // getUserInfo()
+        //   .then((res: any) => {
+        //     this.roles = res.data.user.roles
+        //     resolve(res)
+        //   })
+        //   .catch((error) => {
+        //     reject(error)
+        //   })
       })
     },
     /** 切换角色 */

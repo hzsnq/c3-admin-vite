@@ -6,12 +6,14 @@ import App from "./App.vue"
 import ElementPlus from "element-plus"
 import loadSvg from "@/icons"
 import * as directives from "@/directives"
+import JsonViewer from "vue-json-viewer"
 
 import "uno.css"
 import "normalize.css"
 import "element-plus/dist/index.css"
 import "element-plus/theme-chalk/dark/css-vars.css"
 import "@/styles/index.scss"
+import "vue-json-viewer/style.css"
 
 const app = createApp(App)
 /** Element-Plus 组件完整引入 */
@@ -22,5 +24,6 @@ loadSvg(app)
 Object.keys(directives).forEach((key) => {
   app.directive(key, (directives as { [key: string]: Directive })[key])
 })
+app.use(JsonViewer)
 
 app.use(store).use(router).mount("#app")

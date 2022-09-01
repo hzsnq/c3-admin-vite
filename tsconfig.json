@@ -16,6 +16,8 @@
     /** https://vitejs.cn/guide/features.html#typescript-compiler-options */
     "isolatedModules": true,
     "esModuleInterop": true,
+    "noImplicitAny": false,
+    "allowJs": true,
     "lib": [
       "esnext",
       "dom"
