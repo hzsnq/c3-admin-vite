@@ -76,9 +76,9 @@ export const constantRoutes: Array<RouteRecordRaw> = [
     ]
   },
   {
-    path: "/Json",
+    path: "/json",
     component: Layout,
-    redirect: "/Json/index",
+    redirect: "/json/index",
     meta: {
       title: "JSON",
       icon: "menu"
@@ -90,6 +90,28 @@ export const constantRoutes: Array<RouteRecordRaw> = [
         name: "Json",
         meta: {
           title: "格式化",
+          icon: "menu",
+          affix: false,
+          keepAlive: true
+        }
+      }
+    ]
+  },
+  {
+    path: "/note",
+    component: Layout,
+    redirect: "/note/noteList",
+    meta: {
+      title: "笔记",
+      icon: "menu"
+    },
+    children: [
+      {
+        path: "noteList",
+        component: defineAsyncComponent(() => import("@/views/note/index.vue")),
+        name: "noteList",
+        meta: {
+          title: "笔记列表",
           icon: "menu",
           affix: false,
           keepAlive: true

@@ -62,14 +62,14 @@ const handleDelClick = (index) => {
         <template #default="scope">
           <el-tag class="ml-2" :type="scope.row.isGateway ? 'success' : 'danger'">{{
             scope.row.isGateway ? "老网关" : "新网关"
-            }}</el-tag>
+          }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="Operations" width="180">
         <template #default="scope">
           <el-button link type="primary" size="small" @click="handleClick(scope.$index)">发起</el-button>
           <el-button link type="primary" size="small" @click="handleClickDialog(scope.$index, scope.row)"
-          >返回值</el-button
+            >返回值</el-button
           >
           <el-button link type="primary" size="small" @click="handleDelClick(scope.$index)">删除</el-button>
         </template>
