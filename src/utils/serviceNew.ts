@@ -101,7 +101,7 @@ function createRequestFunction(service: AxiosInstance) {
       req_no: new Date().getTime(),
       sign_type: "MD5",
       timestamp: getNowFormatDate(),
-      version: "1.0",
+      version: 1,
       sign: ""
     }
     const apiUrl = config.baseURL
