@@ -14,7 +14,7 @@ type menuType = {
  * */
 const modules = import.meta.glob("./markdown/*.md", { as: "raw" })
 const modulesArray = Object.entries(modules)
-
+console.log(modules)
 const noteData = reactive<menuType>({
   menuList: [],
   menuData: [],
@@ -24,7 +24,6 @@ const noteData = reactive<menuType>({
 
 modulesArray.map((item: any) => {
   const str = item[1].split("\n")
-  console.log(item)
   noteData.menuList = [...noteData.menuList, str[0]]
   noteData.menuData = [...noteData.menuData, item[1]]
 })
